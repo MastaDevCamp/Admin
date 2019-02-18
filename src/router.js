@@ -6,6 +6,7 @@ import EventPage from './pages/EventPage.vue';
 import GoldPage from './pages/GoldPage.vue';
 import RubyPage from './pages/RubyPage.vue';
 import AlertPage from './pages/AlertPage.vue';
+import VersionPage from './pages/VersionPage.vue';
 
 // import messagesRoutes from '@/modules/messages/router';
 // import peopleRoutes from '@/modules/people/router';
@@ -14,49 +15,54 @@ const baseRoutes = [
   {
     path: '/',
     name: 'login',
-    component: LoginPage,
+    component: LoginPage
   },
   {
     path: '/home',
     name: 'home',
-    component: HomePage,
+    component: HomePage
   },
   {
     path: '/notice',
     name: 'notice',
-    component: NoticePage,
+    component: NoticePage
   },
   {
     path: '/event',
     name: 'event',
-    component: EventPage,
+    component: EventPage
   },
   {
     path: '/gold',
     name: 'gold',
-    component: GoldPage,
+    component: GoldPage
   },
   {
     path: '/ruby',
     name: 'ruby',
-    component: RubyPage,
+    component: RubyPage
   },
   {
     path: '/alert',
     name: 'alert',
-    component: AlertPage,
+    component: AlertPage
+  },
+  {
+    path: '/version',
+    name: 'version',
+    component: VersionPage
   },
   {
     path: '*',
     redirect: {
-      name: 'home',
-    },
-  },
+      name: 'home'
+    }
+  }
 ];
 
 // const routes = baseRoutes.concat(messagesRoutes, peopleRoutes);
-const routes = baseRoutes;
+// const routes = baseRoutes;
 export default new Router({
   mode : 'history',
-  routes,
+  routes : baseRoutes
 });
