@@ -3,9 +3,9 @@ import router from '../router'
 
 const DOMAIN = 'http://localhost:8082'
 
-const request = (method, url, data) => {
+const fileRequest = (url, data) => {
     return axios({
-        method: method,
+        method: 'post',
         url : DOMAIN + url,
         data: data,
         config: { headers: {'Content-Type': 'multipart/form-data' }}
@@ -20,8 +20,28 @@ const request = (method, url, data) => {
     });
 }
 
-export const upload= {
+const request = (method, url, data) => {
+    return axios({
+        method: method,
+        url : DOMAIN + url,
+        data: data,
+    }).then(function (response) {
+        //handle success
+        console.log(response);
+        return response;
+    })
+    .catch(function (response) {
+        //handle error
+        console.log(response);
+    });
+}
+
+
+export const fileServer= {
     newVersion(data){
-        return request('post', '/upload/newVersion', data);
+        return fileRequest('post', '/upload/newVersion', data);
+    },
+    getVersionList(){
+        return request('get', '/upload/all', null);
     }
 }
