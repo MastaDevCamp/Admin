@@ -1,6 +1,13 @@
 <template>
     <div class="version">
         <h2>New Version Input</h2>
+        <ul v-if="todos.length">
+			<Listing
+				v-for="todo in todos"
+				:key="todo.id"
+				:todo="todo"
+			/>
+		</ul>
         <form @submit.prevent="onSubmit" name="fileForm" ref="fleForm">
             <div>
                 <label for="newVersion"></label>
@@ -16,13 +23,36 @@
 
 <script>
 import {upload} from '../api/fileServer'
+import VueRouter from 'vue-router';
+import Listing from '../components/VersionPage/Listing.vue'
+
+let nextTodoId = 1
+
 export default {
+    components: {
+        Listing
+        
+    },
     data() {
         return {
             version: '',
             sourceFile: '',
             rPath : '',
             responseTxt: '',
+            todos: [ //listing에 넘겨줘야할 값들
+				{
+					id: nextTodoId++,
+					text: 'Learn Vue'
+				},
+				{
+					id: nextTodoId++,
+					text: 'Learn about single-file components'
+				},
+				{
+					id: nextTodoId++,
+					text: 'Fall in love'
+				}
+			]
         }
     },
     computed : {
@@ -58,6 +88,7 @@ export default {
         }
     }
 }
+
 </script>
 
 <style>
