@@ -39,9 +39,9 @@ const request = (method, url, data) => {
 
 export const fileServer= {
     newVersion(data){
-        return fileRequest('post', '/upload/newVersion', data);
+        return fileRequest('/upload/newVersion', data);
     },
     getVersionList(){
-        return request('get', '/upload/all', null);
+        return request('get', '/admin/all', null);
     }
 }

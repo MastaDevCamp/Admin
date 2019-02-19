@@ -1,38 +1,18 @@
 <template>
   <div class="container">
-    <h2>Version List<button id="versionBtn" class="btn btn-success" v-on:click="getVersionList">getAllVersion</button></h2>
-    <table class="responsive-table" >
-      <thead>
-        <tr>
-          <td>version</td>
-          <td>full</td>
-          <td>patch</td>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="elt in versionList">  <!--여기 에러 뜨는데 잘 실행됌!-->
-          <td>{{elt.version}}</td>
-          <td>{{elt.full}}<file-content ></file-content></td>
-          <td>{{elt.patch}}</td>
-        </tr>
-      </tbody>
-    </table>
-    <fileContent/>
+    
   </div>
 </template>
 
 <script>
 import { fileServer } from "../../api/fileServer";
-import fileContent from "./FileContent";
 
 export default {
+  name: "TodoPage",
   data() {
     return {
       versionList: []
     };
-  },
-  components : {
-      fileContent
   },
   methods: {
     getVersionList() {
@@ -48,9 +28,6 @@ export default {
           this.responseTxt = "서버 에러";
         });
     }
-  },
-  mounted() {
-    this.getVersionList();
   }
 };
 </script>
