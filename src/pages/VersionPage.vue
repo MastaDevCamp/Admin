@@ -1,9 +1,7 @@
 <template>
     <div class="version">
-        <h2>New Version Input</h2>
         <versionUp/>
         <Listing/>
-        
     </div>
 </template>
 
@@ -11,11 +9,13 @@
 import VueRouter from 'vue-router';
 import Listing from '../components/VersionPage/Listing.vue'
 import VersionUp from '../components/VersionPage/VersionUp'
+import FileContent from '../components/VersionPage/FileContent'
 
 export default {
     components: {
         Listing,
-        VersionUp
+        VersionUp,
+        FileContent
     },
     data() {
         return {
