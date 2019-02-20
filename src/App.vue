@@ -50,32 +50,37 @@ export default {
         href: 'home',
         router: true,
         title: '메인 화면',
-        icon: 'home',
+        icon: 'home'
       },{
         href: 'notice',
         router: true,
         title: '공지사항 관리',
-        icon: 'notification_important',
+        icon: 'notification_important'
       }, {
         href: 'event',
         router: true,
         title: '이벤트 관리',
-        icon: 'event',
+        icon: 'event'
       }, {
         href: 'gold',
         router: true,
         title: '골드 관리',
-        icon: 'money',
+        icon: 'money'
       }, {
         href: 'ruby',
         router: true,
         title: '루비 관리',
-        icon: 'attach_money',
+        icon: 'attach_money'
       }, {
         href: 'alert',
         router: true,
         title: '푸시 알림',
-        icon: 'add_alert',
+        icon: 'add_alert'
+      }, {
+        href: 'version',
+        router: true,
+        title: '버전 관리',
+        icon: 'folder_open',
       }],
     };
   },
@@ -115,7 +120,7 @@ html, body, #app {
   cursor: pointer;
 }
 .btn-success {
-  background-color: #5aac44;
+  background-color: #152e56;
   box-shadow: 0 1px 0 #519839;
 }
 .form-control {
