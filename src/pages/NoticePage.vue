@@ -27,12 +27,14 @@
       :search="search"
     >
     <template slot="items" slot-scope="props">
-        <td class="text-xs-left">{{ props.item.title }}</td>
-        <td class="text-xs-left">{{ props.item.contents }}</td>
-        <td class="text-xs-left">{{ props.item.begin_at }}</td>
-        <td class="text-xs-left">{{ props.item.finish_at }}</td>
+        <td class="text-xs-left" nowrap width="200">
+            {{ props.item.title }}
+        </td>
+        <td class="text-xs-left" width="300">{{ props.item.contents }}</td>
+        <td class="text-center">{{ props.item.begin_at }}</td>
+        <td class="text-center">{{ props.item.finish_at }}</td>
         <td class="text-xs-left">{{ props.item.filelink }}</td>
-        <td>
+        <td class="text-center">
           <v-dialog
           v-model="detailDialog"
           width="600">
@@ -65,7 +67,7 @@
           </v-card>
           </v-dialog>
         </td>
-        <td>
+        <td class="text-center">
           <v-dialog
           v-model="editDialog"
           persistent
@@ -111,7 +113,7 @@
           </v-card>
           </v-dialog>
         </td>
-        <td>
+        <td class="text-center">
           <v-btn color="error" fab small dark v-on:click="deleteNotice(props.item.notice_id)">
             <v-icon>delete</v-icon>
           </v-btn>
@@ -176,6 +178,10 @@ export default {
       .then(data => {
         this.rows = data.responseData
         for(let i=0; i<this.rows.length; i++){
+          if(this.rows[i].title.length > 15)
+            this.rows[i].title = this.rows[i].title.slice(0,15) + "..."
+          if(this.rows[i].contents.length > 100)
+            this.rows[i].contents = this.rows[i].contents.slice(0,100) + "..."
           this.rows[i].finish_at = formatter.dateFormat(this.rows[i].finish_at)
           this.rows[i].begin_at = formatter.dateFormat(this.rows[i].begin_at)
           this.rows[i].post_at = formatter.dateFormat(this.rows[i].post_at)
