@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import {auth, setAuthInHeader} from '../api/auth'
+import {auth, setAuthInHeader} from '../api'
 export default {
     data() {
         return {
