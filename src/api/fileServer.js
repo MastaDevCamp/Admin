@@ -45,9 +45,9 @@ export const fileServer= {
         return request('get', '/admin/all', null);
     },
     getFullVersionContent(searchValue){
-        return request('get', '/admin/getFull?full' + +'=' +searchValue, null);
+        return request('get', '/admin/getFull?full=' +searchValue, null);
     },
     getPatchVersionContent(searchValue){
-        return request('get', '/admin/getPatch?patch'+'=' +searchValue, null);
+        return request('get', '/admin/getPatch?patch=' +searchValue, null);
     }
 }

@@ -120,7 +120,7 @@ html, body, #app {
   cursor: pointer;
 }
 .btn-success {
-  background-color: #5aac44;
+  background-color: #152e56;
   box-shadow: 0 1px 0 #519839;
 }
 .form-control {

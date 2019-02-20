@@ -1,9 +1,8 @@
 <template>
-  <div class="container">
+  <div>
+    <h3>{{ versionTitle }}</h3>
     <ul id="tags">
-      <li v-repeat="VersionContent">
-        {{$value}}
-      </li>
+      <li v-for="content in versionContents" v-bind:key="content.id">{{ content }}</li>
     </ul>
   </div>
 </template>
@@ -14,32 +13,36 @@ import { fileServer } from "../../api/fileServer";
 export default {
   data() {
     return {
-      VersionContent: []
+      versionContents: null,
+      versionTitle: null
     };
   },
   methods: {
-    getVersionContent(path, type){
-      if(type == 'full'){
-        fileServer.getFullVersionContent(path)
-        .then(response => {
-          console.log(response.data.responseData);
-          this.VersionContent = response.data.responseData.slice();
-          console.log(this.VersionContent);
-        })
-        .catch(err => {
-          this.responseTxt = "서버 에러";
-        });
-      }else{
-        fileServer.getPatchVersionContent(path)
-        .then(response => {
-          console.log(response.data.responseData);
-          this.VersionContent = response.data.responseData.slice();
-          console.log(this.VersionContent);
-        })
-        .catch(err => {
-          this.responseTxt = "서버 에러";
-        });
-      }   
+    getVersionContent(path, type) {
+      var vm = this;
+      if (type == "full") {
+        fileServer
+          .getFullVersionContent(path)
+          .then(response => {
+            vm.versionTitle = path;
+            vm.versionContents = response.data.responseData.slice();
+            console.log(this.versionContents);
+          })
+          .catch(err => {
+            this.responseTxt = err;
+          });
+      } else {
+        fileServer
+          .getPatchVersionContent(path)
+          .then(response => {
+            vm.versionTitle = path;
+            vm.versionContents = response.data.responseData.slice();
+            console.log(this.versionContents);
+          })
+          .catch(err => {
+            this.responseTxt = err;
+          });
+      }
     }
   }
 };
