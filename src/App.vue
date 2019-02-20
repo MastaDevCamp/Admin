@@ -98,6 +98,8 @@ export default {
 html, body, #app {
   height: 100%;
   margin: 0px;
+  background-color: #f7f7f7
+
 }
 #app {
   display: flex;

@@ -1,51 +1,55 @@
 <template>
   <div class="container">
     <h2>Upload New Version</h2>
-    <form @submit.prevent="onSubmit" name="fileForm" ref="fleForm">
-      <div>
-        <label for="newVersion"></label>
-        <input
-          class="form-control"
-          type="text"
-          name="version"
-          v-model="version"
-          autofocus
-          placeholder="newVersion"
-        >
-        <label for="file"></label>
-        <input
-          class="form-control"
-          type="file"
-          name="sourceFile"
-          ref="file"
-          v-on:change="handleFileUpload()"
-        >
-      </div>
-
-      <v-flex xs12>
-        <v-card>
-          <v-card-actions>
-            <v-btn
-              color="indigo"
-              class= "white--text"
-              :class="{'btn-success' : !invalidForm}"
-              type="submit"
-              :disabled="invalidForm"
-            >Upload New Version</v-btn>
-            <div class="text-truncate">
-              <div v-if="responseTxt != null">
-                <p class="result">{{ responseTxt }}</p>
+    <v-flex xs12>
+      <v-card>
+        <form @submit.prevent="onSubmit" name="fileForm" ref="fleForm">
+          <v-card-title primary-title>
+            <v-flex xs10>
+              <label for="newVersion"></label>
+              <input
+                class="form-control"
+                type="text"
+                name="version"
+                v-model="version"
+                autofocus
+                placeholder="newVersion"
+              >
+              <label for="file"></label>
+              <input
+                class="form-control"
+                type="file"
+                name="sourceFile"
+                ref="file"
+                v-on:change="handleFileUpload()"
+              >
+            </v-flex>
+          </v-card-title>
+          <v-divider></v-divider>
+          <v-flex xs10>
+            <v-card-actions>
+              <v-btn
+                color="indigo"
+                class="white--text"
+                :class="{'btn-success' : !invalidForm}"
+                type="submit"
+                :disabled="invalidForm"
+              >Upload New Version</v-btn>
+              <div class="text-truncate">
+                <div v-if="responseTxt != null">
+                  <p class="result">{{ responseTxt }}</p>
+                </div>
+                <div v-else>
+                  <p class="result">등록중
+                    <v-progress-circular indeterminate color="primary"></v-progress-circular>
+                  </p>
+                </div>
               </div>
-              <div v-else>
-                <p class="result">등록중
-                  <v-icon>fas fa-circle-notch fa-spin</v-icon>
-                </p>
-              </div>
-            </div>
-          </v-card-actions>
-        </v-card>
-      </v-flex>
-    </form>
+            </v-card-actions>
+          </v-flex>
+        </form>
+      </v-card>
+    </v-flex>
   </div>
 </template>
 
@@ -94,12 +98,10 @@ export default {
 
 
 <style>
-
 .result {
   margin-bottom: 0px;
   margin-left: 10px;
   font-weight: bold;
-  color:gray;
+  color: gray;
 }
-
 </style>

@@ -17,6 +17,7 @@
             </v-btn></td>
       </template>
     </v-data-table>
+    <br>
     <fileContent ref="fileContent"></fileContent>
   </div>
 </template>
