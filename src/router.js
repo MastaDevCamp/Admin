@@ -35,6 +35,16 @@ const baseRoutes = [
     component: CreateNoticePage, 
   },
   {
+    path: '/notice/modify/:nid',
+    name: 'modifyNotice',
+    component: ModifyNoticePage, 
+  },
+  {
+    path: '/notice/detail/:nid',
+    name: 'modifyNotice',
+    component: ModifyNoticePage, 
+  },
+  {
     path: '/event',
     name: 'event',
     component: EventPage
