@@ -2,6 +2,8 @@ import Router from 'vue-router';
 import LoginPage from './pages/LoginPage.vue';
 import HomePage from './pages/HomePage.vue';
 import NoticePage from './pages/NoticePage.vue';
+import CreateNoticePage from './pages/CreateNoticePage.vue';
+import ModifyNoticePage from './pages/ModifyNoticePage.vue';
 import EventPage from './pages/EventPage.vue';
 import GoldPage from './pages/GoldPage.vue';
 import RubyPage from './pages/RubyPage.vue';
@@ -25,7 +27,12 @@ const baseRoutes = [
   {
     path: '/notice',
     name: 'notice',
-    component: NoticePage
+    component: NoticePage, 
+  },
+  {
+    path: '/notice/create',
+    name: 'createNotice',
+    component: CreateNoticePage, 
   },
   {
     path: '/event',
