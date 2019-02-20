@@ -7,10 +7,6 @@ import VueGoodTablePlugin from 'vue-good-table'
 import 'vue-good-table/dist/vue-good-table.css'
 import './registerServiceWorker';
 
-import VueMaterial from 'vue-material'
-import 'vue-material/dist/vue-material.css';
-
-Vue.use(VueMaterial)
 Vue.config.productionTip = false;
 
 Vue.use(Vuetify);

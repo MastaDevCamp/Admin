@@ -1,10 +1,16 @@
 <template>
-  <div>
-    <h3>{{ versionTitle }}</h3>
-    <ul id="tags">
-      <li v-for="content in versionContents" v-bind:key="content.id">{{ content }}</li>
-    </ul>
-  </div>
+<v-card class="contents">
+        <v-list subheader>
+          <v-subheader>{{ versionTitle }}</v-subheader>
+          <v-list-tile class="contents-text"
+             v-for="content in versionContents" v-bind:key="content.id"
+          >
+            <v-list-tile-content>
+              <v-list-tile-title v-html="content"></v-list-tile-title>
+            </v-list-tile-content>
+          </v-list-tile>
+        </v-list>
+</v-card>
 </template>
 
 <script>
@@ -49,4 +55,10 @@ export default {
 </script>
 
 <style>
+.v-subheader{
+  font-size: 30px;
+}
+.contents-text{
+  font-size: 15px;
+}
 </style>
