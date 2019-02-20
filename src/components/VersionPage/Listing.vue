@@ -10,14 +10,14 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="elt in versionList">  <!--여기 에러 뜨는데 잘 실행됌!-->
+        <tr v-for="elt in versionList" v-bind:key="elt"> 
           <td>{{elt.version}}</td>
-          <td>{{elt.full}}<file-content ></file-content></td>
-          <td>{{elt.patch}}</td>
+          <td>{{elt.full}} <button @click="throwFilePath(elt.full, 'full')">Show Files</button> </td>
+          <td>{{elt.patch}} <button @click="throwFilePath(elt.patch, 'patch')">Show Files</button> </td>
         </tr>
       </tbody>
     </table>
-    <fileContent/>
+    <fileContent ref="fileContent"></fileContent>
   </div>
 </template>
 
@@ -28,7 +28,8 @@ import fileContent from "./FileContent";
 export default {
   data() {
     return {
-      versionList: []
+      versionList: [],
+      filePath: ""
     };
   },
   components : {
@@ -47,6 +48,9 @@ export default {
         .catch(err => {
           this.responseTxt = "서버 에러";
         });
+    },
+    throwFilePath(path){
+      this.$refs.getVersionContent(path)
     }
   },
   mounted() {

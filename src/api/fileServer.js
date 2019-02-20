@@ -43,5 +43,11 @@ export const fileServer= {
     },
     getVersionList(){
         return request('get', '/admin/all', null);
+    },
+    getFullVersionContent(searchValue){
+        return request('get', '/admin/getFull?full' + +'=' +searchValue, null);
+    },
+    getPatchVersionContent(searchValue){
+        return request('get', '/admin/getPatch?patch'+'=' +searchValue, null);
     }
 }
