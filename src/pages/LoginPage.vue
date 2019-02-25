@@ -1,22 +1,19 @@
 <template>
-    <vue-container>
     <div class="login my-5">
-        <h2>Login to MNG Admin</h2>
+        <h2>MNG 관리자 페이지 로그인</h2>
         <form @submit.prevent="onSubmit">
-
             <div>
-                <label for="name">Name</label>
-                <input class="form-control" type="text" name="name" v-model="name" autofocus placeholder="name" />
+                <label for="username">USERNAME</label>
+                <input class="form-control" type="text" name="username" v-model="username" autofocus placeholder="name" />
             </div>
             <div>
-                <label for="password">Password</label>
+                <label for="password">PASSWORD</label>
                 <input class="form-control" type="password" v-model="password" placeholder="123123"/>
             </div>
             <button class="btn" :class="{'btn-success' : !invalidForm}" type="submit" :disabled="invalidForm">Login</button>
         </form>
         <p class="error" v-if="error">{{error}}</p>
     </div>
-    </vue-container>
 </template>
 
 <script>
@@ -24,7 +21,7 @@ import {auth, setAuthInHeader} from '../api'
 export default {
     data() {
         return {
-            name : '',
+            username : '',
             password : '', 
             error : '',
             rPath : ''
@@ -32,7 +29,7 @@ export default {
     },
     computed : {
         invalidForm() {
-            return !this.name || !this.password
+            return !this.username || !this.password
         }
     },
     created() {
@@ -40,16 +37,17 @@ export default {
     },
     methods : {
         onSubmit() {
-            console.log(this.name, this.password)
-            auth.login(this.name, this.password)
+            console.log(this.username, this.password)
+            
+            auth.login(this.username, this.password)
             .then(data => {
-                localStorage.setItem('token', data.responseData.token)
-                setAuthInHeader(data.responseData.token)
+                localStorage.setItem('token',  data.token)
+                console.log(data)
                 this.$router.push(this.rPath)
-                // console.log(data.responseData.token)
+                setAuthInHeader(data.token)
             })
             .catch(err => {
-                console.log(err)
+                this.error = err
             })
         }
     }

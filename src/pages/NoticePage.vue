@@ -23,6 +23,7 @@
       </v-card-title>
     <v-data-table
       :headers="headers"
+      :pagination.sync="pagination"
       :items="rows"
       :search="search"
     >
@@ -88,9 +89,9 @@
                     v-model="selectedNotice.title"></v-text-field>
                   </v-flex>
                   <v-flex xs12>
-                    <v-text-field
+                    <v-textarea
                     label="내용"
-                    v-model="selectedNotice.contents"></v-text-field>
+                    v-model="selectedNotice.contents"></v-textarea>
                   </v-flex>
                   <v-flex xs12>
                     <v-text-field
@@ -176,16 +177,23 @@ export default {
       console.log("fecthNotice")
       notice.fetchNoticeAll()
       .then(data => {
-        this.rows = data.responseData
-        for(let i=0; i<this.rows.length; i++){
-          if(this.rows[i].title.length > 15)
-            this.rows[i].title = this.rows[i].title.slice(0,15) + "..."
-          if(this.rows[i].contents.length > 100)
-            this.rows[i].contents = this.rows[i].contents.slice(0,100) + "..."
-          this.rows[i].finish_at = formatter.dateFormat(this.rows[i].finish_at)
-          this.rows[i].begin_at = formatter.dateFormat(this.rows[i].begin_at)
-          this.rows[i].post_at = formatter.dateFormat(this.rows[i].post_at)
+        if(data.responseMessage === "유저 권환 없음") {
+          this.$router.push('/')
         }
+        else {
+          console.log("AUTHORIZATION")
+          this.rows = data.responseData
+          for(let i=0; i<this.rows.length; i++){
+            if(this.rows[i].title.length > 15)
+              this.rows[i].title = this.rows[i].title.slice(0,15) + "..."
+            if(this.rows[i].contents.length > 100)
+              this.rows[i].contents = this.rows[i].contents.slice(0,100) + "..."
+            this.rows[i].finish_at = formatter.dateFormat(this.rows[i].finish_at)
+            this.rows[i].begin_at = formatter.dateFormat(this.rows[i].begin_at)
+            this.rows[i].post_at = formatter.dateFormat(this.rows[i].post_at)
+          }
+        }
+        
       })
       .catch(err => {
         console.log(err)
@@ -201,12 +209,17 @@ export default {
     showNotice(idx) {
       notice.fetchNoticeWithIdx(idx)
       .then(data => {
-        this.board = data.responseData
-        this.board.finish_at = formatter.dateFormat(this.board.finish_at)
-        this.board.begin_at = formatter.dateFormat(this.board.begin_at)
-        this.board.post_at = formatter.dateFormat(this.board.post_at)
-        
-        this.detailDialog = true
+        if(data.responseMessage === "유저 권환 없음") {
+          this.$router.push('/')
+        }
+        else {
+          this.board = data.responseData
+          this.board.finish_at = formatter.dateFormat(this.board.finish_at)
+          this.board.begin_at = formatter.dateFormat(this.board.begin_at)
+          this.board.post_at = formatter.dateFormat(this.board.post_at)
+          
+          this.detailDialog = true
+        }
       })
       .catch(err => {
         console.log(err)
@@ -216,7 +229,6 @@ export default {
       console.log("delete : ",idx)
       notice.delete(idx)
       .then(data => {
-        
         this.fetchNotice()
       })
     },
@@ -227,6 +239,10 @@ export default {
           .then(data => {
           this.rows = data.responseData
           for(let i=0; i<this.rows.length; i++){
+            if(this.rows[i].title.length > 15)
+              this.rows[i].title = this.rows[i].title.slice(0,15) + "..."
+            if(this.rows[i].contents.length > 100)
+              this.rows[i].contents = this.rows[i].contents.slice(0,100) + "..."
             this.rows[i].finish_at = formatter.dateFormat(this.rows[i].finish_at)
             this.rows[i].begin_at = formatter.dateFormat(this.rows[i].begin_at)
             this.rows[i].post_at = formatter.dateFormat(this.rows[i].post_at)
@@ -242,6 +258,10 @@ export default {
           .then(data => {
           this.rows = data.responseData
           for(let i=0; i<this.rows.length; i++){
+            if(this.rows[i].title.length > 15)
+              this.rows[i].title = this.rows[i].title.slice(0,15) + "..."
+            if(this.rows[i].contents.length > 100)
+              this.rows[i].contents = this.rows[i].contents.slice(0,100) + "..."
             this.rows[i].finish_at = formatter.dateFormat(this.rows[i].finish_at)
             this.rows[i].begin_at = formatter.dateFormat(this.rows[i].begin_at)
             this.rows[i].post_at = formatter.dateFormat(this.rows[i].post_at)
@@ -274,7 +294,9 @@ export default {
       editDialog : false,
       name : '',
       pagination : {
-        sortBy : 'begin_at'
+        rowsPerPage : 10,
+        descending : true,
+        sortBy : 'post_at'
       },
       selectedIdx : '',
       selected : [],
