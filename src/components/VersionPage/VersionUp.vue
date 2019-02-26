@@ -79,8 +79,8 @@ export default {
       console.log(this.sourceFile[0]);
 
       let bodyFormData = new FormData();
-      bodyFormData.set("version", this.version);
-      bodyFormData.append("sourceFile", this.sourceFile[0]);
+      bodyFormData.set("newVersion", this.version);
+      bodyFormData.append("newVersionFile", this.sourceFile[0]);
 
       fileServer
         .newVersion(bodyFormData)
